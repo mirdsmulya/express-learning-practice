@@ -9,8 +9,10 @@ const port = process.env.PORT || 3030;
 const Book = require('./models/bookModels');
 const bookRouter = require('./routes/bookRouter')(Book);
 
-
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', bookRouter);
